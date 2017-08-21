@@ -51,7 +51,9 @@ and add: NTP=pool.ntp.org
 10. Prepare OMOBUS environment:
 
     $ git clone https://github.com/omobus/omobus-server-buildscripts
+
     $ cd ./omobus-server-buildscripts
+
     $ sudo sh ./debian.sh
 
 After all, install omobus services.
