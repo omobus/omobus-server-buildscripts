@@ -8,9 +8,7 @@ server based on the operating system with the Linux kernel.
 recomended partition table is:
 
     /       = 20 Gb
-
     /var    > 200 Gb
-
     swap    = 0 Gb (__without__ swap)
 
 required software during installation process is:
