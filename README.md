@@ -65,6 +65,7 @@ After all, install omobus services.
 # LICENSE
 
 Copyright (c) 2006 - 2017 ak-obs, Ltd. <info@omobus.net>.
+
 All rights reserved.
 
 This program is a free software. Redistribution and use in source
