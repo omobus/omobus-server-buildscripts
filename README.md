@@ -6,9 +6,9 @@ server based on the operating system with the Linux kernel.
 1. Install the Debian 9.x:
 
 recomended partition table is:
-    /       = 20 Gb
-    /var    > 200 Gb
-    swap    = 0 Gb (without swap)
+    * /       = 20 Gb
+    * /var    > 200 Gb
+    * swap    = 0 Gb (without swap)
 
 required software during installation process is:
 
@@ -16,7 +16,7 @@ required software during installation process is:
 
 2. Configure Debian:
 
-    # apt-get install sudo ufw git-core mc sudo
+    \# apt-get install sudo ufw git-core mc sudo
 
 3. Create extra logins:
 
