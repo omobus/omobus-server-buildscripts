@@ -1,0 +1,11 @@
+[Unit]
+Description=Lighttpd Server Daemon
+After=local-fs.target network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/lighttpd.pid
+ExecStart=/usr/local/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+# /etc/logrotate.d/omobusd:  omobus.d logrotate rules.
+
+/var/log/omobus.d/*.log {
+    compress
+    weekly
+    rotate 5
+    olddir /var/log/omobus.d-OLD
+    notifempty
+    missingok
+    copytruncate
+}

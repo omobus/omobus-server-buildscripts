@@ -1,0 +1,10 @@
+# /etc/logrotate.d/dovecot: Dovecot logrotate rules.
+
+/var/log/dovecot.log {
+    compress
+    weekly
+    rotate 5
+    notifempty
+    missingok
+    copytruncate
+}

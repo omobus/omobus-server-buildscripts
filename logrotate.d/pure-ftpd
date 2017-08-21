@@ -1,0 +1,10 @@
+# /etc/logrotate.d/pure-ftpd: Pure-FTPd logrotate rules.
+
+/var/log/pure-ftpd.log {
+    compress
+    weekly
+    rotate 5
+    notifempty
+    missingok
+    copytruncate
+}

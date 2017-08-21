@@ -1,0 +1,10 @@
+# /etc/logrotate.d/pgsql: PostgreSQL logrotate rules.
+
+/var/log/pgsql/*.log {
+    compress
+    weekly
+    rotate 5
+    notifempty
+    missingok
+    copytruncate
+}

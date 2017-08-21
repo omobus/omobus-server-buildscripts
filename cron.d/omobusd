@@ -1,0 +1,10 @@
+# /etc/cron.d/omobusd: omobus crond rules.
+
+0 1-23/1 * * * root /usr/local/bin/omobus-event acts docs
+0 3,23 * * * root /usr/local/bin/omobus-event sync
+0 1 * * * root /usr/local/bin/omobus-event gc
+#0 22 * * * root /usr/local/bin/omobus-event import
+#15 5,14,21 * * * root /usr/local/bin/omobus-event export
+5 0 * * mon,sat root /usr/local/bin/omobus-backup
+##0 23 * * sat root /bin/sh /etc/omobus.d/omobus-mls-compile.sh > /dev/null
+##0 23 * * sun root /bin/sh /etc/omobus.d/omobus-ocid-compile.sh > /dev/null

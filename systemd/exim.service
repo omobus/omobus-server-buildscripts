@@ -1,0 +1,12 @@
+[Unit]
+Description=Exim MTA Server Daemon
+After=local-fs.target network.target
+Requires=slapd.service
+
+[Service]
+PIDFile=/var/run/exim.pid
+ExecStart=/usr/local/sbin/exim -bdf -q30m
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

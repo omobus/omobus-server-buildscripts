@@ -1,0 +1,11 @@
+# /etc/logrotate.d/omobus-scgi.d: omobus-scgi.d logrotate rules.
+
+/var/log/omobus-scgi.d/*.log {
+    compress
+    weekly
+    rotate 5
+    olddir /var/log/omobus-scgi.d-OLD
+    notifempty
+    missingok
+    copytruncate
+}
