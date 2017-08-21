@@ -32,7 +32,9 @@ required software during installation process is:
 6. Change SSH port (if needed) to the 22022:
 
     $ sudo mcedit /etc/ssh/sshd_config
+
     $ sudo ufw allow 22022/tcp
+
     $ sudo systemctl restart ssh
 
 7. Enable firewall:
