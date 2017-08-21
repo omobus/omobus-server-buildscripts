@@ -6,9 +6,9 @@ server based on the operating system with the Linux kernel.
 1. Install the Debian 9.x:
 
 recomended partition table is:
-    * /       = 20 Gb
-    * /var    > 200 Gb
-    * swap    = 0 Gb (without swap)
+>    /       = 20 Gb
+>    /var    > 200 Gb
+>    swap    = 0 Gb (__without__ swap)
 
 required software during installation process is:
 
@@ -20,11 +20,11 @@ required software during installation process is:
 
 3. Create extra logins:
 
-    # useradd -m -s /bin/bash XXX && passwd XXX
+    \# useradd -m -s /bin/bash XXX && passwd XXX
 
 4. Edit sudo rules:
 
-    # mcedit /etc/sudoers
+    \# mcedit /etc/sudoers
 
 5. Reconnect to the server with new user login (if needed).
 
