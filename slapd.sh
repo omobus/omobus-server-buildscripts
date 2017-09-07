@@ -21,7 +21,6 @@ make install
 cd $MYDIR
 
 ln -s /usr/local/libexec/slapd /usr/local/sbin/slapd
-cp ./slapd-env /usr/local/libexec && chown -v root:root /usr/local/libexec/slapd-env && chmod -v 700 /usr/local/libexec/slapd-env
 
 groupadd $GROUP
 useradd -g $GROUP -d /var/lib/slapd -s /dev/null $USER

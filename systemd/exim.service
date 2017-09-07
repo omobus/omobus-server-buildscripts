@@ -1,7 +1,7 @@
 [Unit]
 Description=Exim MTA Server Daemon
-After=local-fs.target network.target
-Requires=slapd.service
+After=local-fs.target network.target slapd.service
+#Requires=slapd.service
 
 [Service]
 PIDFile=/var/run/exim.pid

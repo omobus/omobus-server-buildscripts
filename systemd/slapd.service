@@ -5,7 +5,8 @@ After=syslog.target
 [Service]
 Type=forking
 PIDFile=/var/run/slapd/slapd.pid
-ExecStartPre=/usr/local/libexec/slapd-env
+ExecStartPre=/bin/mkdir -m 755 -p /var/run/slapd
+ExecStartPre=/bin/chown openldap:openldap /var/run/slapd
 ExecStart=/usr/local/sbin/slapd -f /etc/slapd/slapd.conf -u openldap -g openldap -h "ldap:///"
 #"ldap://127.0.0.1:389/ ldaps:/// ldapi:///"
 

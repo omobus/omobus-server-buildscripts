@@ -2,8 +2,8 @@
 Description=Dovecot IMAP/POP3 email server
 Documentation=man:dovecot(1)
 Documentation=http://wiki2.dovecot.org/
-After=local-fs.target network.target
-Requires=slapd.service
+After=local-fs.target network.target slapd.service
+#Requires=slapd.service
 
 [Service]
 Type=forking
