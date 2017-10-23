@@ -12,9 +12,15 @@ if [ -z $1 ]; then
 fi
 
 cd $SRCDIR
-#git clone https://github.com/Neilpang/acme.sh.git
+git clone https://github.com/Neilpang/acme.sh.git
 cd $SRCDIR/acme.sh
 mkdir -pv $SRCDIR/acme.sh/.data
 echo "ACCOUNT_EMAIL='support@omobus.net'" > $SRCDIR/acme.sh/.data/account.conf 
 $SRCDIR/acme.sh/acme.sh --issue --home $SRCDIR/acme.sh/.data -d $1 -w /var/www/htdocs --use-wget --syslog 3 --log /var/log/letsencrypt.log --log-level 2
+rm /etc/ssl/omobus/lighttpd.pem
+cat $SRCDIR/acme.sh/.data/$1/$1.cer $SRCDIR/acme.sh/.data/$1/$1.key > /etc/ssl/omobus/lighttpd.pem && chmod 600 /etc/ssl/omobus/lighttpd.pem && chown omobus:omobus /etc/ssl/omobus/lighttpd.pem
 cd $MYDIR
+
+echo "33 0 20 * * root $SRCDIR/acme.sh/acme.sh --renew --home $SRCDIR/acme.sh/.data -d $1 -w /var/www/htdocs --use-wget --syslog 3 --log /var/log/letsencrypt.log --log-level 2 --renew-hook=\"/bin/cat $SRCDIR/acme.sh/.data/$1/$1.cer $SRCDIR/acme.sh/.data/$1/$1.key > /etc/ssl/omobus/lighttpd.pem && /bin/chmod 600 /etc/ssl/omobus/lighttpd.pem && /bin/chown omobus:omobus /etc/ssl/omobus/lighttpd.pem && /bin/systemctl restart lighttpd\" > /dev/null" > /etc/cron.d/letsencrypt
+chown root:root /etc/cron.d/letsencrypt
+chmod 644 /etc/cron.d/letsencrypt
