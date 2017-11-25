@@ -50,3 +50,13 @@ mkdir -m 700 -p /var/log/omobus-scgi.d-OLD && chown -fv omobus:omobus /var/log/o
 mkdir -m 700 -p /var/cache/omobus.d && chown -fv omobus:omobus /var/cache/omobus.d
 mkdir -m 700 -p /var/lib/omobus.d && chown -fv omobus:omobus /var/lib/omobus.d
 mkdir -m 700 -p /var/lib/omobus-scgi.d && chown -fv omobus:omobus /var/lib/omobus-scgi.d
+
+cp ./omobus-backups.sh /usr/local/bin/omobus-backups
+cp ./omobus-backups.default /etc/default/omobus-backups
+chmod 0755 /usr/local/bin/omobus-backups
+chmod 0600 /etc/default/omobus-backups
+chown roor:root /usr/local/bin/omobus-backups /etc/default/omobus-backups
+
+cp ./omobus-ps.sh /usr/local/bin/omobus-ps
+chmod 0755 /usr/local/bin/omobus-ps
+chown root:root /usr/local/bin/omobus-ps
