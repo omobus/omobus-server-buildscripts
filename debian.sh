@@ -50,6 +50,11 @@ mkdir -m 700 -p /var/log/omobus-scgi.d-OLD && chown -fv omobus:omobus /var/log/o
 mkdir -m 700 -p /var/cache/omobus.d && chown -fv omobus:omobus /var/cache/omobus.d
 mkdir -m 700 -p /var/lib/omobus.d && chown -fv omobus:omobus /var/lib/omobus.d
 mkdir -m 700 -p /var/lib/omobus-scgi.d && chown -fv omobus:omobus /var/lib/omobus-scgi.d
+mkdir -m 755 -p /var/lib/omobus-scgi.d/dev && chown -fv root:root /var/lib/omobus-scgi.d/dev
+
+touch /var/lib/omobus-scgi.d/dev/random
+touch /var/lib/omobus-scgi.d/dev/urandom
+cp /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem /var/lib/omobus-scgi.d/OMOBUS_Root_Certification_Authority.pem
 
 cp ./omobus-backups.sh /usr/local/bin/omobus-backups
 cp ./omobus-backups.default /etc/default/omobus-backups
