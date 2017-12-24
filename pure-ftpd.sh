@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Pure-FTPd
-FILE=pure-ftpd-1.0.46
+FILE=pure-ftpd-1.0.47
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
 
