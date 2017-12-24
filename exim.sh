@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Exim
-FILE=exim-4.89
+FILE=exim-4.90
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
