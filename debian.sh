@@ -56,11 +56,11 @@ touch /var/lib/omobus-scgi.d/dev/random
 touch /var/lib/omobus-scgi.d/dev/urandom
 cp /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem /var/lib/omobus-scgi.d/OMOBUS_Root_Certification_Authority.pem
 
-cp ./omobus-backups.sh /usr/local/bin/omobus-backups
-cp ./omobus-backups.default /etc/default/omobus-backups
-chmod 0755 /usr/local/bin/omobus-backups
-chmod 0600 /etc/default/omobus-backups
-chown roor:root /usr/local/bin/omobus-backups /etc/default/omobus-backups
+cp ./omobus-backup.sh /usr/local/bin/omobus-backup
+cp ./omobus-backup.default /etc/default/omobus-backup
+chmod 0755 /usr/local/bin/omobus-backup
+chmod 0600 /etc/default/omobus-backup
+chown root:root /usr/local/bin/omobus-backup /etc/default/omobus-backup
 
 cp ./omobus-ps.sh /usr/local/bin/omobus-ps
 chmod 0755 /usr/local/bin/omobus-ps
