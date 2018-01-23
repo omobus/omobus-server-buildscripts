@@ -47,7 +47,7 @@ required software during installation process is:
 
 9. Change systemd tymesync service configuration:
 
-    $ mcedit /etc/systemd/timesync.conf
+    $ sudo mcedit /etc/systemd/timesyncd.conf
 
 and add: NTP=pool.ntp.org
 
