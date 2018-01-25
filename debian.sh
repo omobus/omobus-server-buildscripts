@@ -7,6 +7,8 @@ apt-get update
 apt-get upgrade
 apt-get install mc ufw man git-core groff-base gcc g++ gdb make automake autoconf libtool pkg-config bison flex gawk wput wget curl uuid-dev libxml2-dev libz-dev libbz2-dev libpcre3-dev libreadline-dev libssl-dev libdb-dev libjpeg-dev 
 
+timedatectl set-ntp true
+
 groupadd omobus -g 905
 useradd -g omobus -d /var/lib/omobus -s /bin/bash -m -u 902 omobus
 
