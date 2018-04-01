@@ -13,8 +13,6 @@ groupadd omobus -g 905
 useradd -g omobus -d /var/lib/omobus -s /bin/bash -m -u 902 omobus
 
 mkdir -m 700 -v -p /etc/ssl/omobus && chown -v omobus:omobus /etc/ssl/omobus
-cp ./OMOBUS_Root_Certification_Authority.pem /etc/ssl/certs
-chmod 600 /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem && chown omobus:omobus /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem
 cp ./omobus.net.pem /etc/ssl/omobus
 chmod 600 /etc/ssl/omobus/omobus.net.pem && chown omobus:omobus /etc/ssl/omobus/omobus.net.pem
 
@@ -54,9 +52,13 @@ mkdir -m 700 -p /var/lib/omobus.d && chown -fv omobus:omobus /var/lib/omobus.d
 mkdir -m 700 -p /var/lib/omobus-scgi.d && chown -fv omobus:omobus /var/lib/omobus-scgi.d
 mkdir -m 755 -p /var/lib/omobus-scgi.d/dev && chown -fv root:root /var/lib/omobus-scgi.d/dev
 
+cp ./OMOBUS_Root_Certification_Authority.pem /var/lib/omobus.d
+cp ./OMOBUS_Root_Certification_Authority.pem /var/lib/omobus-scgi.d
+chmod 644 /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem && chown root:root /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem
+chmod 644 /var/lib/omobus-scgi.d/OMOBUS_Root_Certification_Authority.pem && chown root:root /var/lib/omobus-scgi.d/OMOBUS_Root_Certification_Authority.pem
+
 touch /var/lib/omobus-scgi.d/dev/random
 touch /var/lib/omobus-scgi.d/dev/urandom
-cp /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem /var/lib/omobus-scgi.d/OMOBUS_Root_Certification_Authority.pem
 
 cp ./omobus-backup.sh /usr/local/bin/omobus-backup
 cp ./omobus-backup.default /etc/default/omobus-backup
