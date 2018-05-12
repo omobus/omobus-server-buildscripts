@@ -41,9 +41,9 @@ $TAR -cf $BACKUP_PATH/$DATA_FILE.tar $DATA_PATH
 $SU omobus -c "$PGDUMP -Fc -f $BACKUP_PATH/$DB_FILE.pgd omobus-proxy-db"
 
 # --verbose
-$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$LDAP_FILE.ldif.bz2 --user $USER:$PASSWD ftp://$HOST/$LDAP_FILE-$DATE_MARK.ldif.bz2 2> $BACKUP_PATH/$LDAP_FILE.log
-$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DATA_FILE.tar --user $USER:$PASSWD ftp://$HOST/$DATA_FILE-$DATE_MARK.tar 2> $BACKUP_PATH/$DATA_FILE.log
-$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /etc/ssl/certs/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DB_FILE.pgd --user $USER:$PASSWD ftp://$HOST/$DB_FILE-$DATE_MARK.pgd 2> $BACKUP_PATH/$DB_FILE.log
+$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$LDAP_FILE.ldif.bz2 --user $USER:$PASSWD ftp://$HOST/$LDAP_FILE-$DATE_MARK.ldif.bz2 2> $BACKUP_PATH/$LDAP_FILE.log
+$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DATA_FILE.tar --user $USER:$PASSWD ftp://$HOST/$DATA_FILE-$DATE_MARK.tar 2> $BACKUP_PATH/$DATA_FILE.log
+$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DB_FILE.pgd --user $USER:$PASSWD ftp://$HOST/$DB_FILE-$DATE_MARK.pgd 2> $BACKUP_PATH/$DB_FILE.log
 
 exit 0
 
