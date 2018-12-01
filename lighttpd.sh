@@ -14,18 +14,10 @@ if [ ! -f $FILE.tar.gz ]; then
     wget http://download.lighttpd.net/lighttpd/releases-1.4.x/$FILE.tar.gz
 fi
 
-#cd $SRCDIR
-#git clone https://github.com/maxmind/geoip-api-c
-#cd $SRCDIR/geoip-api-c
-#./bootstrap
-#./configure --silent
-#make install
-#cd $MYDIR
-
 tar -xf ./$FILE.tar.gz -C $SRCDIR
 cd $SRCDIR/$FILE
 ./bootstrap
-./configure --silent --libdir=/usr/local/lib/lighttpd --with-openssl --with-zlib #--with-geoip
+./configure --silent --libdir=/usr/local/lib/lighttpd --with-openssl --with-zlib
 make install
 cd $MYDIR
 
@@ -64,8 +56,3 @@ systemctl enable lighttpd
 
 ufw allow 80/tcp
 ufw allow 443/tcp
-
-#wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
-#gzip -d GeoIP.dat.gz
-#mv ./GeoIP.dat /var/www/GeoIP.dat
-#chown $USER:$GROUP /var/www/GeoIP.dat && chmod 644 /var/www/GeoIP.dat
