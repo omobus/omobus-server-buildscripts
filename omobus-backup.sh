@@ -13,6 +13,7 @@ SLAPCAT=/usr/local/sbin/slapcat
 TAR=/bin/tar
 SU=/bin/su
 RM=/bin/rm
+MV=/bin/mv
 CHOWN=/bin/chown
 MKDIR=/bin/mkdir
 
@@ -23,27 +24,24 @@ DB_FILE=omobus-proxy-db
 LDAP_FILE=omobus-users
 DATA_FILE=omobus-data
 
-HOST=backups.omobus.net:21021
-USER=none
-PASSWD=none
-
-if test -f /etc/default/omobus-backup; then
-    . /etc/default/omobus-backup
-fi
-
 $MKDIR -p $BACKUP_PATH
 $CHOWN omobus:omobus $BACKUP_PATH
-$RM -f $BACKUP_PATH/$LDAP_FILE.ldif.bz2
-$RM -f $BACKUP_PATH/$DB_FILE.pgd
+$RM -f $BACKUP_PATH/$LDAP_FILE.1.ldif.bz2
+$MV $BACKUP_PATH/$LDAP_FILE.ldif.bz2 $BACKUP_PATH/$LDAP_FILE.1.ldif.bz2
+$RM -f $BACKUP_PATH/$DB_FILE.1.pgd
+$MV $BACKUP_PATH/$DB_FILE.pgd $BACKUP_PATH/$DB_FILE.1.pgd
 
 $SLAPCAT -f $SLAPD_CONF -b "dc=omobus,dc=local" | $BZIP2 > $BACKUP_PATH/$LDAP_FILE.ldif.bz2
 $TAR -cf $BACKUP_PATH/$DATA_FILE.tar $DATA_PATH
 $SU omobus -c "$PGDUMP -Fc -f $BACKUP_PATH/$DB_FILE.pgd omobus-proxy-db"
 
-# --verbose
-$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$LDAP_FILE.ldif.bz2 --user $USER:$PASSWD ftp://$HOST/$LDAP_FILE-$DATE_MARK.ldif.bz2 2> $BACKUP_PATH/$LDAP_FILE.log
-$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DATA_FILE.tar --user $USER:$PASSWD ftp://$HOST/$DATA_FILE-$DATE_MARK.tar 2> $BACKUP_PATH/$DATA_FILE.log
-$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DB_FILE.pgd --user $USER:$PASSWD ftp://$HOST/$DB_FILE-$DATE_MARK.pgd 2> $BACKUP_PATH/$DB_FILE.log
+if test -f /etc/default/omobus-backup; then
+    . /etc/default/omobus-backup
+
+    $CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$LDAP_FILE.ldif.bz2 --user $USER:$PASSWD ftp://$HOST/$LDAP_FILE-$DATE_MARK.ldif.bz2 2> $BACKUP_PATH/$LDAP_FILE.log
+    $CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DATA_FILE.tar --user $USER:$PASSWD ftp://$HOST/$DATA_FILE-$DATE_MARK.tar 2> $BACKUP_PATH/$DATA_FILE.log
+    #$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DB_FILE.pgd --user $USER:$PASSWD ftp://$HOST/$DB_FILE-$DATE_MARK.pgd 2> $BACKUP_PATH/$DB_FILE.log
+fi
 
 exit 0
 
