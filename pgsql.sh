@@ -16,7 +16,7 @@ fi
 
 tar -xf ./$FILE.tar.bz2 -C $SRCDIR
 cd $SRCDIR/$FILE
-./configure --silent --disable-thread-safety --with-uuid=e2fs --prefix=$PREFIX #--with-ldap --with-openssl
+./configure --silent --disable-thread-safety --with-uuid=e2fs --with-systemd --prefix=$PREFIX #--with-ldap --with-openssl
 make install
 cd ./contrib/postgres_fdw/
 make install
