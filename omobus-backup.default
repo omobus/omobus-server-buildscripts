@@ -2,6 +2,6 @@
 # perform common modifications to the behavior of the omobus-backup script.
 
 ## ftp server:
-HOST=backups.omobus.net:21021
-USER=admin
-PASSWD=0
+#HOST=backups.omobus.net:21021
+#USER=
+#PASSWD=
