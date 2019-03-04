@@ -1,6 +1,6 @@
 #!/bin/sh
 # This file is a part of the omobus-server-buildscripts project.
-# Copyright (c) 2006 - 2017 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2019 ak-obs, Ltd. <info@omobus.net>.
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 apt-get update
@@ -69,3 +69,5 @@ chown root:root /usr/local/bin/omobus-backup /etc/default/omobus-backup
 cp ./omobus-ps.sh /usr/local/bin/omobus-ps
 chmod 0755 /usr/local/bin/omobus-ps
 chown root:root /usr/local/bin/omobus-ps
+
+sh ./fstab.sh
