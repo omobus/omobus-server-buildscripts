@@ -26,6 +26,8 @@ cd ../file_fdw/
 make install
 cd ../hstore/
 make install
+cd ../isn/
+make install
 cd ../uuid-ossp/
 make install
 cd $MYDIR
