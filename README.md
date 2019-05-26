@@ -59,7 +59,7 @@ and add: NTP=pool.ntp.org
 
     $ cd ./omobus-server-buildscripts
 
-    $ sudo sh ./debian.sh
+    $ sudo sh ./omobus-core-server.sh
 
 After all, install omobus services.
 
