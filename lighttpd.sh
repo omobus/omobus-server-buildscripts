@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=lighttpd
-FILE=lighttpd-1.4.45
+FILE=lighttpd-1.4.54
 USER=lighttpd
 GROUP=lighttpd
 MYDIR=`pwd`
@@ -16,10 +16,12 @@ fi
 
 tar -xf ./$FILE.tar.gz -C $SRCDIR
 cd $SRCDIR/$FILE
-./bootstrap
-./configure --silent --libdir=/usr/local/lib/lighttpd --with-openssl --with-zlib
-make install
+./configure --silent --libdir=/usr/local/lib/lighttpd --with-openssl --with-ldap
+make install-strip
 cd $MYDIR
+
+rm /usr/local/sbin/lighttpd-angel
+rm /usr/local/lib/lighttpd/*.la
 
 ldconfig
 
@@ -36,6 +38,9 @@ mkdir -m 700 -v -p /var/www/run && chown -v $USER:$GROUP /var/www/run
 mkdir -m 700 -v -p /var/www/htdocs && chown -v $USER:$GROUP /var/www/htdocs
 mkdir -m 700 -v -p /var/www/uploads && chown -v $USER:$GROUP /var/www/uploads
 mkdir -m 700 -v -p /var/www/log && chown -v $USER:$GROUP /var/www/log
+
+mkdir -m 755 -p /var/www/dev && chown -fv root:root /var/www/dev
+touch /var/www/dev/null
 
 ln -sr /etc/ssl/omobus/omobus.net.pem /etc/ssl/omobus/lighttpd.pem
 
