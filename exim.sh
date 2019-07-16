@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Exim
-FILE=exim-4.90.1
+FILE=exim-4.92
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
@@ -36,3 +36,6 @@ systemctl daemon-reload
 systemctl enable exim
 
 ufw allow 25/tcp
+
+rm -v /usr/local/sbin/exi*.O
+rm -v /usr/local/sbin/exim-4.90*
