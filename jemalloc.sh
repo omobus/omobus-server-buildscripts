@@ -9,6 +9,7 @@ SRCDIR=/usr/local/src
 cd $SRCDIR
 git clone https://github.com/jemalloc/jemalloc
 cd $SRCDIR/jemalloc
+git checkout master
 ./autogen.sh
 ./configure --silent --disable-cxx
 make
