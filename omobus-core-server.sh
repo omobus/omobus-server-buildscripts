@@ -72,3 +72,5 @@ chmod 0755 /usr/local/bin/omobus-ps
 chown root:root /usr/local/bin/omobus-ps
 
 sh ./fstab.sh
+
+userdel -rf games
