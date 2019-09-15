@@ -1,7 +1,0 @@
-# This is a configuration file for /usr/local/bin/omobus-backup; it allows you to
-# perform common modifications to the behavior of the omobus-backup script.
-
-## ftp server:
-#HOST=backups.omobus.net:21021
-#USER=
-#PASSWD=

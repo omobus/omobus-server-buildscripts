@@ -7,7 +7,6 @@
 DATE_MARK=`date +%Y%m%d%H%M`
 #DATE_MARK=`date +%w`
 PGDUMP=/usr/local/libexec/pgsql-9.6/bin/pg_dump
-CURL=/usr/bin/curl
 BZIP2=/bin/bzip2
 SLAPCAT=/usr/local/sbin/slapcat
 TAR=/bin/tar
@@ -34,14 +33,6 @@ $MV $BACKUP_PATH/$DB_FILE.pgd $BACKUP_PATH/$DB_FILE.1.pgd
 $SLAPCAT -f $SLAPD_CONF -b "dc=omobus,dc=local" | $BZIP2 > $BACKUP_PATH/$LDAP_FILE.ldif.bz2
 $TAR -cf $BACKUP_PATH/$DATA_FILE.tar $DATA_PATH
 $SU omobus -c "$PGDUMP -Fc -f $BACKUP_PATH/$DB_FILE.pgd omobus-proxy-db"
-
-if test -f /etc/default/omobus-backup; then
-    . /etc/default/omobus-backup
-
-    $CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$LDAP_FILE.ldif.bz2 --user $USER:$PASSWD ftp://$HOST/$LDAP_FILE-$DATE_MARK.ldif.bz2 2> $BACKUP_PATH/$LDAP_FILE.log
-    $CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DATA_FILE.tar --user $USER:$PASSWD ftp://$HOST/$DATA_FILE-$DATE_MARK.tar 2> $BACKUP_PATH/$DATA_FILE.log
-    #$CURL --ftp-create-dirs --retry 40 --retry-delay 60 --ssl --cacert /var/lib/omobus.d/OMOBUS_Root_Certification_Authority.pem --upload-file $BACKUP_PATH/$DB_FILE.pgd --user $USER:$PASSWD ftp://$HOST/$DB_FILE-$DATE_MARK.pgd 2> $BACKUP_PATH/$DB_FILE.log
-fi
 
 exit 0
 
