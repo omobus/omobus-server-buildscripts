@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Exim
-FILE=exim-4.92.1
+FILE=exim-4.92.2
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
@@ -19,6 +19,10 @@ cd $SRCDIR/$FILE
 cp $MYDIR/exim.rules $SRCDIR/$FILE/Local/Makefile
 make install
 cd $MYDIR
+
+rm -vf /usr/local/sbin/exi*.O
+rm -vf /usr/local/sbin/exim-4.90*
+rm -vf /usr/local/sbin/exim-4.92-*
 
 cp -r ./exim/ /etc/
 cp ./systemd/exim.service /etc/systemd/system
@@ -36,6 +40,3 @@ systemctl daemon-reload
 systemctl enable exim
 
 ufw allow 25/tcp
-
-rm -v /usr/local/sbin/exi*.O
-rm -v /usr/local/sbin/exim-4.90*
