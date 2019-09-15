@@ -4,24 +4,51 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Dovecot
-FILE=dovecot-2.2.31
+FILE=dovecot-2.3.7.2
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
 
-if [ ! -f $FILE.tar.gz ]; then
-    wget http://www.dovecot.org/releases/2.2/$FILE.tar.gz
-fi
+rm -vf /usr/local/lib/dovecot/auth/*
+rm -vf /usr/local/lib/dovecot/dict/*
+rm -vf /usr/local/lib/dovecot/doveadm/*
+rm -vf /usr/local/lib/dovecot/stats/*
+rm -vf /usr/local/lib/dovecot/*
+rm -vf /usr/local/libexec/dovecot/*
 
-tar -xf ./$FILE.tar.gz -C $SRCDIR
+#if [ ! -f $FILE.tar.gz ]; then
+##    wget http://www.dovecot.org/releases/2.3/$FILE.tar.gz
+#    wget https://github.com/dovecot/core/archive/$FILE.tar.gz
+#fi
+#
+#tar -xf ./$FILE.tar.gz -C $SRCDIR
+#cd $SRCDIR/$FILE
+
+cd $SRCDIR
+git clone https://github.com/dovecot/core
+mv $SRCDIR/core $SRCDIR/$FILE
 cd $SRCDIR/$FILE
-./configure --silent --with-ldap --with-bzlib --with-zlib --with-ssl=openssl \
+touch ./doc/wiki/Authentication.txt
+## apt-get install gettext
+./autogen.sh
+PANDOC=false ./configure --silent --with-ldap --with-bzlib --with-zlib --with-ssl=openssl \
     --without-pam --without-nss --without-shadow --without-bsdauth \
     --localstatedir=/var
 make
 make install
 cd $MYDIR
+rm -vf /usr/local/lib/dovecot/auth/*.la
+rm -vf /usr/local/lib/dovecot/auth/*.a
+rm -vf /usr/local/lib/dovecot/dict/*.la
+rm -vf /usr/local/lib/dovecot/dict/*.a
+rm -vf /usr/local/lib/dovecot/doveadm/*.la
+rm -vf /usr/local/lib/dovecot/doveadm/*.a
+rm -vf /usr/local/lib/dovecot/stats/*.la
+rm -vf /usr/local/lib/dovecot/stats/*.a
+rm -vf /usr/local/lib/dovecot/*.la
+rm -vf /usr/local/lib/dovecot/*.a
+exit
 
 groupadd dovenull
 useradd -g dovenull -d /dev/null -s /dev/null dovenull
