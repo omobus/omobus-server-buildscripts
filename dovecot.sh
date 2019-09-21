@@ -48,7 +48,6 @@ rm -vf /usr/local/lib/dovecot/stats/*.la
 rm -vf /usr/local/lib/dovecot/stats/*.a
 rm -vf /usr/local/lib/dovecot/*.la
 rm -vf /usr/local/lib/dovecot/*.a
-exit
 
 groupadd dovenull
 useradd -g dovenull -d /dev/null -s /dev/null dovenull
