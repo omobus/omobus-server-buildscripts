@@ -4,7 +4,8 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Dovecot
-FILE=dovecot-2.3.7.2
+VER=2.3.8
+FILE=dovecot-$VER
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
@@ -17,20 +18,15 @@ rm -vf /usr/local/lib/dovecot/stats/*
 rm -vf /usr/local/lib/dovecot/*
 rm -vf /usr/local/libexec/dovecot/*
 
-#if [ ! -f $FILE.tar.gz ]; then
-##    wget http://www.dovecot.org/releases/2.3/$FILE.tar.gz
-#    wget https://github.com/dovecot/core/archive/$FILE.tar.gz
-#fi
-#
-#tar -xf ./$FILE.tar.gz -C $SRCDIR
-#cd $SRCDIR/$FILE
+if [ ! -f $FILE.tar.gz ]; then
+    wget -O ./$FILE.tar.gz https://github.com/dovecot/core/archive/$VER.tar.gz
+fi
 
-cd $SRCDIR
-git clone https://github.com/dovecot/core
-mv $SRCDIR/core $SRCDIR/$FILE
+tar -xf ./$FILE.tar.gz -C $SRCDIR
+mv $SRCDIR/core-$VER $SRCDIR/$FILE
 cd $SRCDIR/$FILE
+
 touch ./doc/wiki/Authentication.txt
-## apt-get install gettext
 ./autogen.sh
 PANDOC=false ./configure --silent --with-ldap --with-bzlib --with-zlib --with-ssl=openssl \
     --without-pam --without-nss --without-shadow --without-bsdauth \
@@ -48,6 +44,8 @@ rm -vf /usr/local/lib/dovecot/stats/*.la
 rm -vf /usr/local/lib/dovecot/stats/*.a
 rm -vf /usr/local/lib/dovecot/*.la
 rm -vf /usr/local/lib/dovecot/*.a
+
+ldconfig
 
 groupadd dovenull
 useradd -g dovenull -d /dev/null -s /dev/null dovenull
