@@ -66,4 +66,4 @@ mkdir -m 750 -p /var/spool/dovecot && chown $USER:$GROUP /var/spool/dovecot
 systemctl daemon-reload
 systemctl enable dovecot
 
-ufw allow 110/tcp
+ufw allow 21110/tcp
