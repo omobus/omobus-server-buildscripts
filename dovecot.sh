@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Dovecot
-VER=2.3.8
+VER=2.3.9.2
 FILE=dovecot-$VER
 USER=omobus
 GROUP=omobus
@@ -25,6 +25,12 @@ fi
 tar -xf ./$FILE.tar.gz -C $SRCDIR
 mv $SRCDIR/core-$VER $SRCDIR/$FILE
 cd $SRCDIR/$FILE
+
+# Controlling inactivity timeout:
+# https://dovecot.org/pipermail/dovecot/2015-February/099713.html
+# >>   /src/lib-master/master-interface.h
+# >>   -#define MASTER_LOGIN_TIMEOUT_SECS (3*60)
+# >>   +#define MASTER_LOGIN_TIMEOUT_SECS (110)
 
 touch ./doc/wiki/Authentication.txt
 ./autogen.sh
@@ -60,8 +66,10 @@ chown root:root /etc/dovecot/dovecot.conf && chmod 600 /etc/dovecot/dovecot.conf
 chown root:root /etc/dovecot/dovecot-ldap.conf && chmod 600 /etc/dovecot/dovecot-ldap.conf
 
 ln -sr /etc/ssl/omobus/omobus.net.pem /etc/ssl/omobus/dovecot.pem
+openssl dhparam -out /etc/ssl/private/dovecot-dhparams.pem 4096
 
 mkdir -m 750 -p /var/spool/dovecot && chown $USER:$GROUP /var/spool/dovecot
+
 
 systemctl daemon-reload
 systemctl enable dovecot
