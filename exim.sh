@@ -14,6 +14,8 @@ if [ ! -f $FILE.tar.bz2 ]; then
     wget http://exim.mirror.gtcomm.net/exim/exim4/$FILE.tar.bz2
 fi
 
+rm -vf /usr/local/sbin/exim
+
 tar -xf ./$FILE.tar.bz2 -C $SRCDIR
 cd $SRCDIR/$FILE
 cp $MYDIR/exim.rules $SRCDIR/$FILE/Local/Makefile
