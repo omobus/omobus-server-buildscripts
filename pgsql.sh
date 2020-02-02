@@ -55,9 +55,6 @@ mkdir -m 700 /var/log/pgsql && chown postgres:postgres /var/log/pgsql
 
 su postgres -c "$PREFIX/bin/initdb -D /var/lib/pgsql/data"
 su postgres -c "mkdir -m 0700 /var/lib/pgsql/data/omobus"
-su postgres -c "echo 'mcc,mnc,cid,lac,latitude,longitude,radio,changeable' > /var/lib/pgsql/data/omobus/MLS-celltowers.txt"
-su postgres -c "echo 'mcc,mnc,cid,lac,latitude,longitude,radio,changeable' > /var/lib/pgsql/data/omobus/OCID-celltowers.txt"
-chmod 0600 /var/lib/pgsql/data/omobus/MLS-celltowers.txt /var/lib/pgsql/data/omobus/OCID-celltowers.txt
 
 mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.tmp
 
