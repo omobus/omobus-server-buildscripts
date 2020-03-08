@@ -6,7 +6,7 @@
 echo '' > ./fstab.tmp
 echo '# omobus mount points:' >> ./fstab.tmp
 echo 'tmpfs         /var/www/run                        tmpfs  rw,noexec,nosuid,nodev,size=3145728                         0    0' >> ./fstab.tmp
-echo 'tmpfs         /var/www/htdocs                     tmpfs  rw,noexec,nosuid,nodev,size=5242880                         0    0' >> ./fstab.tmp
+echo 'tmpfs         /var/www/htdocs                     tmpfs  rw,noexec,nosuid,nodev,size=15728640                        0    0' >> ./fstab.tmp
 echo '/dev/null     /var/www/dev/null                   none   bind                                                        0    0' >> ./fstab.tmp
 echo '/dev/random   /var/lib/omobus-scgi.d/dev/random   none   bind                                                        0    0' >> ./fstab.tmp
 echo '/dev/urandom  /var/lib/omobus-scgi.d/dev/urandom  none   bind                                                        0    0' >> ./fstab.tmp
