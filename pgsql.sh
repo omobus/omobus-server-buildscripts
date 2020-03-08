@@ -54,7 +54,6 @@ mkdir -m 700 /var/lib/pgsql/data && chown postgres:postgres /var/lib/pgsql/data
 mkdir -m 700 /var/log/pgsql && chown postgres:postgres /var/log/pgsql
 
 su postgres -c "$PREFIX/bin/initdb -D /var/lib/pgsql/data"
-su postgres -c "mkdir -m 0700 /var/lib/pgsql/data/omobus"
 
 mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.tmp
 
