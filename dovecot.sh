@@ -52,7 +52,7 @@ rm -vf /usr/local/lib/dovecot/*.la
 rm -vf /usr/local/lib/dovecot/*.a
 
 ldconfig
-exit
+
 groupadd dovenull
 useradd -g dovenull -d /dev/null -s /dev/null dovenull
 groupadd dovecot
