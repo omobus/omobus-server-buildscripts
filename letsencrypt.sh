@@ -1,6 +1,6 @@
 #!/bin/sh
 # This file is a part of the omobus-server-buildscripts project.
-# Copyright (c) 2006 - 2019 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2020 ak-obs, Ltd. <info@omobus.net>.
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 MYDIR=`pwd`
