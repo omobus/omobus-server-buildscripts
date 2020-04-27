@@ -1,10 +1,10 @@
 #!/bin/sh
 # This file is a part of the omobus-server-buildscripts project.
-# Copyright (c) 2006 - 2019 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2020 ak-obs, Ltd. <info@omobus.net>.
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Dovecot
-VER=2.3.9.2
+VER=2.3.10
 FILE=dovecot-$VER
 USER=omobus
 GROUP=omobus
@@ -52,7 +52,7 @@ rm -vf /usr/local/lib/dovecot/*.la
 rm -vf /usr/local/lib/dovecot/*.a
 
 ldconfig
-
+exit
 groupadd dovenull
 useradd -g dovenull -d /dev/null -s /dev/null dovenull
 groupadd dovecot
