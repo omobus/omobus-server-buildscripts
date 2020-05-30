@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Dovecot
-VER=2.3.10
+VER=2.3.10.1
 FILE=dovecot-$VER
 USER=omobus
 GROUP=omobus
@@ -52,7 +52,7 @@ rm -vf /usr/local/lib/dovecot/*.la
 rm -vf /usr/local/lib/dovecot/*.a
 
 ldconfig
-
+exit
 groupadd dovenull
 useradd -g dovenull -d /dev/null -s /dev/null dovenull
 groupadd dovecot
