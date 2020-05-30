@@ -14,9 +14,9 @@ fi
 
 tar -xf ./$FILE.tar.gz -C $SRCDIR
 cd $SRCDIR/$FILE
-./configure --silent --with-rfc2640 --with-ldap --with-language=english --with-peruserlimits \
-    --with-diraliases --with-ftpwho --with-altlog --with-virtualchroot --without-inetd --without-shadow \
-    --with-tls --with-certfile=/etc/ssl/omobus/pure-ftpd.pem
+./configure --silent --with-ldap --with-language=english --with-peruserlimits --with-diraliases \
+    --with-ftpwho --with-altlog --with-virtualchroot --without-inetd --without-shadow --with-tls \
+    --with-certfile=/etc/ssl/omobus/pure-ftpd.pem
 make install
 cd $MYDIR
 
