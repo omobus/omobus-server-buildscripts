@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Pure-FTPd
-FILE=pure-ftpd-1.0.47
+FILE=pure-ftpd-1.0.49
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
 
@@ -19,7 +19,7 @@ cd $SRCDIR/$FILE
     --with-certfile=/etc/ssl/omobus/pure-ftpd.pem
 make install
 cd $MYDIR
-
+exit
 cp -r ./pure-ftpd/ /etc/
 cp ./systemd/pure-ftpd.service /etc/systemd/system
 chown root:root /etc/systemd/system/pure-ftpd.service && chmod 644 /etc/systemd/system/pure-ftpd.service
