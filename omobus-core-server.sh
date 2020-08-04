@@ -4,8 +4,8 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 apt-get update
-apt-get upgrade
-apt-get install mc ufw man git-core groff-base gcc make automake autoconf libtool pkg-config gettext bison flex gawk wput wget curl uuid-dev libxml2-dev libz-dev libbz2-dev libpcre3-dev libreadline-dev libssl-dev libdb-dev libjpeg-dev libsystemd-dev
+apt-get upgrade -y
+apt-get install mc ufw man git-core groff-base gcc make automake autoconf libtool pkg-config gettext bison flex gawk wput wget curl uuid-dev libxml2-dev libz-dev libbz2-dev libpcre3-dev libreadline-dev libssl-dev libdb-dev libjpeg-dev libsystemd-dev -y
 
 timedatectl set-ntp true
 
