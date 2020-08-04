@@ -17,7 +17,7 @@ required software during installation process is:
 
 2. Configure Debian:
 
-    \# apt-get install sudo ufw git-core mc sudo
+    \# apt-get install sudo ufw git-core mc
 
 3. Create extra logins:
 
