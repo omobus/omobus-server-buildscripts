@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=Exim
-FILE=exim-4.92.3
+FILE=exim-4.94
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
@@ -24,13 +24,14 @@ cd $MYDIR
 
 rm -vf /usr/local/sbin/exi*.O
 rm -vf /usr/local/sbin/exim-4.90*
-rm -vf /usr/local/sbin/exim-4.92-*
+rm -vf /usr/local/sbin/exim-4.92*
 
 cp -r ./exim/ /etc/
 cp ./systemd/exim.service /etc/systemd/system
 chown root:root /etc/systemd/system/exim.service && chmod 644 /etc/systemd/system/exim.service
 chown root:root /etc/exim && chmod 644 /etc/exim
 chown root:root /etc/exim/exim.conf && chmod 600 /etc/exim/exim.conf
+touch /var/lib/omobus.d/whitelist && chown root:root /var/lib/omobus.d/whitelist && chmod 600 /var/lib/omobus.d/whitelist
 
 mkdir -m 750 /var/log/exim && chown $USER:$GROUP /var/log/exim
 
