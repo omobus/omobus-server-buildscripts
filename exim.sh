@@ -31,7 +31,7 @@ cp ./systemd/exim.service /etc/systemd/system
 chown root:root /etc/systemd/system/exim.service && chmod 644 /etc/systemd/system/exim.service
 chown root:root /etc/exim && chmod 644 /etc/exim
 chown root:root /etc/exim/exim.conf && chmod 600 /etc/exim/exim.conf
-touch /var/lib/omobus.d/whitelist && chown root:root /var/lib/omobus.d/whitelist && chmod 600 /var/lib/omobus.d/whitelist
+touch /var/lib/omobus.d/whitelist && chown omobus:omobus /var/lib/omobus.d/whitelist && chmod 600 /var/lib/omobus.d/whitelist
 
 mkdir -m 750 /var/log/exim && chown $USER:$GROUP /var/log/exim
 
