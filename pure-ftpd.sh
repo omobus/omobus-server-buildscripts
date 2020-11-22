@@ -19,7 +19,7 @@ cd $SRCDIR/$FILE
     --with-certfile=/etc/ssl/omobus/pure-ftpd.pem
 make install
 cd $MYDIR
-exit
+
 cp -r ./pure-ftpd/ /etc/
 cp ./systemd/pure-ftpd.service /etc/systemd/system
 chown root:root /etc/systemd/system/pure-ftpd.service && chmod 644 /etc/systemd/system/pure-ftpd.service
