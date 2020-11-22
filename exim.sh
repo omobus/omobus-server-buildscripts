@@ -42,4 +42,4 @@ chown $USER:$GROUP /var/mail && chmod 750 /var/mail
 systemctl daemon-reload
 systemctl enable exim
 
-ufw deny 25025/tcp
+ufw deny 25/tcp
