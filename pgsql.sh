@@ -4,7 +4,7 @@
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=PostgreSQL
-VER=9.6.18
+VER=9.6.20
 FILE=postgresql-$VER
 PREFIX=/usr/local/libexec/pgsql-9.6
 MYDIR=`pwd`
