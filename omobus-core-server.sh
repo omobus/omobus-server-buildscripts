@@ -45,7 +45,7 @@ mkdir -m 700 -p /etc/omobus.d && chown -fv omobus:omobus /etc/omobus.d
 mkdir -m 700 -p /etc/omobus-scgi.d && chown -fv omobus:omobus /etc/omobus-scgi.d
 mkdir -m 700 -p /var/log/omobus.d && chown -fv omobus:omobus /var/log/omobus.d
 mkdir -m 700 -p /var/log/omobus.d-OLD && chown -fv omobus:omobus /var/log/omobus.d-OLD
-mkdir -m 700 -p /var/log/omobus-scgi.d && chown -fv omobus:omobus /var/log/omobus-scgi.d
+mkdir -m 700 -p /var/log/omobus-scgi.d && chown -fv syslog:omobus /var/log/omobus-scgi.d
 mkdir -m 700 -p /var/log/omobus-scgi.d-OLD && chown -fv omobus:omobus /var/log/omobus-scgi.d-OLD
 mkdir -m 700 -p /var/cache/omobus.d && chown -fv omobus:omobus /var/cache/omobus.d
 mkdir -m 700 -p /var/spool/omobus.d && chown -fv omobus:omobus /var/spool/omobus.d
