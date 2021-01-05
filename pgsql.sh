@@ -51,7 +51,6 @@ chown root:root /etc/systemd/system/pgsql.service && chmod 644 /etc/systemd/syst
 
 mkdir -m 700 /var/lib/pgsql && chown postgres:postgres /var/lib/pgsql
 mkdir -m 700 /var/lib/pgsql/data && chown postgres:postgres /var/lib/pgsql/data
-mkdir -m 700 /var/log/pgsql && chown postgres:postgres /var/log/pgsql
 
 su postgres -c "$PREFIX/bin/initdb -D /var/lib/pgsql/data"
 
