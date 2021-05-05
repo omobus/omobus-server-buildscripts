@@ -7,12 +7,8 @@ FILE=libexif-0.6.21
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
 
-#if [ ! -f $FILE.tar.bz2 ]; then
-#    wget http://omobus.net/$FILE.tar.bz2
-#fi
-
 tar -xf ./$FILE.tar.bz2 -C $SRCDIR
 cd $SRCDIR/$FILE
 ./configure --silent
-make install
+make install-strip
 cd $MYDIR
