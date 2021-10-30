@@ -34,6 +34,8 @@ chown root:root /etc/systemd/system/lighttpd.service && chmod 644 /etc/systemd/s
 chown root:root /etc/lighttpd && chmod 755 /etc/lighttpd
 chown $USER:$GROUP /etc/lighttpd/*.conf && chmod 600 /etc/lighttpd/*.conf
 
+mkdir -m 700 -v -p /etc/lighttpd/services && chown -v $USER:$GROUP /etc/lighttpd/services
+
 mkdir -m 700 -v -p /var/www/run && chown -v $USER:$GROUP /var/www/run
 mkdir -m 700 -v -p /var/www/htdocs && chown -v $USER:$GROUP /var/www/htdocs
 mkdir -m 700 -v -p /var/www/uploads && chown -v $USER:$GROUP /var/www/uploads
