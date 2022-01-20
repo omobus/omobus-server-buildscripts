@@ -1,14 +1,15 @@
 #!/bin/sh
 # This file is a part of the omobus-server-buildscripts project.
-# Copyright (c) 2006 - 2021 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 # Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=PostgreSQL
-VER=9.6.24
+VER=14.1
 FILE=postgresql-$VER
-PREFIX=/usr/local/libexec/pgsql-9.6
+PREFIX=/usr/local/libexec/pgsql-14
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
+DBDIR=/var/lib/pgsql/data
 
 if [ ! -f $FILE.tar.bz2 ]; then
     wget http://ftp.postgresql.org/pub/source/v$VER/$FILE.tar.bz2
@@ -18,13 +19,7 @@ tar -xf ./$FILE.tar.bz2 -C $SRCDIR
 cd $SRCDIR/$FILE
 ./configure --silent --disable-thread-safety --with-uuid=e2fs --with-systemd --prefix=$PREFIX #--with-ldap --with-openssl
 make install
-cd ./contrib/postgres_fdw/
-make install
-cd ../dblink/
-make install
-cd ../file_fdw/
-make install
-cd ../hstore/
+cd ./contrib/hstore/
 make install
 cd ../isn/
 make install
@@ -32,14 +27,11 @@ cd ../uuid-ossp/
 make install
 cd $MYDIR
 
-ln -s $PREFIX/bin/psql /usr/local/bin/psql
-ln -s $PREFIX/bin/postgres /usr/local/sbin/postgres
-ln -s $PREFIX/bin/pg_ctl /usr/local/sbin/pg_ctl
-ln -s $PREFIX/include /usr/local/include/pgsql
-ln -s $PREFIX/lib/libpq.so /usr/local/lib/libpq.so
-ln -s $PREFIX/lib/libpq.so.5 /usr/local/lib/libpq.so.5
-ln -s $PREFIX/lib/libpq.so.5.9 /usr/local/lib/libpq.so.5.9
-ln -s $PREFIX/lib/libpq.a /usr/local/lib/libpq.a
+ln -sfv $PREFIX/bin/psql /usr/local/bin/psql
+ln -sfv $PREFIX/include /usr/local/include/pgsql
+ln -sfv $PREFIX/lib/libpq.so.5.14 /usr/local/lib/libpq.so.5.14
+ln -sfv libpq.so.5.14 /usr/local/lib/libpq.so.5
+ln -sfv libpq.so.5 /usr/local/lib/libpq.so
 
 ldconfig
 
@@ -50,19 +42,41 @@ cp ./systemd/pgsql.service /etc/systemd/system
 chown root:root /etc/systemd/system/pgsql.service && chmod 644 /etc/systemd/system/pgsql.service
 
 mkdir -m 700 /var/lib/pgsql && chown postgres:postgres /var/lib/pgsql
-mkdir -m 700 /var/lib/pgsql/data && chown postgres:postgres /var/lib/pgsql/data
+mkdir -m 700 $DBDIR && chown postgres:postgres $DBDIR
 
-su postgres -c "$PREFIX/bin/initdb -D /var/lib/pgsql/data"
+su postgres -c "$PREFIX/bin/initdb -D $DBDIR"
 
-mv /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.tmp
+mv $DBDIR/pg_hba.conf $DBDIR/pg_hba.conf-
+echo "# TYPE  DATABASE        USER            ADDRESS                 METHOD" > $DBDIR/pg_hba.conf
+echo "# \"local\" is for Unix domain socket connections only" >> $DBDIR/pg_hba.conf
+echo "local   all             all                                     trust" >> $DBDIR/pg_hba.conf
+echo "# omobus-proxy-db connections:" >> $DBDIR/pg_hba.conf
+echo "host    all         omobus      127.0.0.1/32          md5" >> $DBDIR/pg_hba.conf
+chmod 0600 $DBDIR/pg_hba.conf && chown postgres:postgres $DBDIR/pg_hba.conf
 
-echo "# TYPE  DATABASE        USER            ADDRESS                 METHOD" > /var/lib/pgsql/data/pg_hba.conf
-echo "# \"local\" is for Unix domain socket connections only" >> /var/lib/pgsql/data/pg_hba.conf
-echo "local   all             all                                     trust" >> /var/lib/pgsql/data/pg_hba.conf
-echo "# omobus-proxy-db connections:" >> /var/lib/pgsql/data/pg_hba.conf
-echo "host    all         omobus      127.0.0.1/32          md5" >> /var/lib/pgsql/data/pg_hba.conf
-
-chmod 0600 /var/lib/pgsql/data/pg_hba.conf && chown postgres:postgres /var/lib/pgsql/data/pg_hba.conf
+mv $DBDIR/postgresql.conf $DBDIR/postgresql.conf-
+echo "$NAME $VER configuration:" >> $DBDIR/postgresql.conf
+echo "" >> $DBDIR/postgresql.conf
+echo "max_connections = 20" >> $DBDIR/postgresql.conf
+echo "" >> $DBDIR/postgresql.conf
+echo "wal_level = minimal" >> $DBDIR/postgresql.conf
+echo "max_wal_senders = 0" >> $DBDIR/postgresql.conf
+echo "max_replication_slots = 0" >> $DBDIR/postgresql.conf
+echo "max_wal_size = 4GB" >> $DBDIR/postgresql.conf
+echo "min_wal_size = 80MB" >> $DBDIR/postgresql.conf
+echo "" >> $DBDIR/postgresql.conf
+echo "log_destination = 'csvlog'" >> $DBDIR/postgresql.conf
+echo "logging_collector = on" >> $DBDIR/postgresql.conf
+echo "log_directory = 'log'" >> $DBDIR/postgresql.conf
+echo "log_rotation_age = 30d" >> $DBDIR/postgresql.conf
+echo "log_rotation_size = 10MB" >> $DBDIR/postgresql.conf
+echo "" >> $DBDIR/postgresql.conf
+echo "#shared_buffers = 4GB" >> $DBDIR/postgresql.conf
+echo "#temp_buffers = 512MB" >> $DBDIR/postgresql.conf
+echo "#work_mem = 4GB" >> $DBDIR/postgresql.conf
+echo "#maintenance_work_mem = 2GB" >> $DBDIR/postgresql.conf
+echo "#max_locks_per_transaction = 128" >> $DBDIR/postgresql.conf
+chmod 0600 $DBDIR/postgresql.conf && chown postgres:postgres $DBDIR/postgresql.conf
 
 systemctl daemon-reload
 systemctl enable pgsql

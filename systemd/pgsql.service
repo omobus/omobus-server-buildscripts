@@ -6,7 +6,7 @@ Documentation=man:postgres(1)
 [Service]
 Type=notify
 User=postgres
-ExecStart=/usr/local/libexec/pgsql-9.6/bin/postgres -D /var/lib/pgsql/data
+ExecStart=/usr/local/libexec/pgsql-14/bin/postgres -D /var/lib/pgsql/data
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=mixed
 KillSignal=SIGINT
