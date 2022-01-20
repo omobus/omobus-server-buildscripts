@@ -55,7 +55,7 @@ echo "host    all         omobus      127.0.0.1/32          md5" >> $DBDIR/pg_hb
 chmod 0600 $DBDIR/pg_hba.conf && chown postgres:postgres $DBDIR/pg_hba.conf
 
 mv $DBDIR/postgresql.conf $DBDIR/postgresql.conf-
-echo "$NAME $VER configuration:" >> $DBDIR/postgresql.conf
+echo "# $NAME $VER configuration:" >> $DBDIR/postgresql.conf
 echo "" >> $DBDIR/postgresql.conf
 echo "max_connections = 20" >> $DBDIR/postgresql.conf
 echo "" >> $DBDIR/postgresql.conf
