@@ -73,7 +73,8 @@ echo "log_rotation_size = 10MB" >> $DBDIR/postgresql.conf
 echo "" >> $DBDIR/postgresql.conf
 echo "#shared_buffers = 2GB" >> $DBDIR/postgresql.conf
 echo "#temp_buffers = 512MB" >> $DBDIR/postgresql.conf
-echo "#work_mem = 64MB # large value may leads to performance degradation!!!" >> $DBDIR/postgresql.conf
+echo "#effective_cache_size = 6GB" >> $DBDIR/postgresql.conf
+echo "#work_mem = 32MB # large value may leads to performance degradation!!!" >> $DBDIR/postgresql.conf
 echo "#maintenance_work_mem = 2GB" >> $DBDIR/postgresql.conf
 echo "#max_locks_per_transaction = 128" >> $DBDIR/postgresql.conf
 chmod 0600 $DBDIR/postgresql.conf && chown postgres:postgres $DBDIR/postgresql.conf
