@@ -1,12 +1,10 @@
 #! /bin/sh
-
-# This file is a part of the omobus-server-buildscripts project.
-# Copyright (c) 2006 - 2021 ak-obs, Ltd. <info@omobus.net>.
-# Author: Igor Artemov <i_artemov@ak-obs.ru>.
+# This file is a part of the omobusproject.
+# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 DATE_MARK=`date +%Y%m%d%H%M`
 #DATE_MARK=`date +%w`
-PGDUMP=/usr/local/libexec/pgsql-9.6/bin/pg_dump
+PGDUMP=/usr/local/libexec/pgsql-14/bin/pg_dump
 BZIP2=/bin/bzip2
 SLAPCAT=/usr/local/sbin/slapcat
 TAR=/bin/tar

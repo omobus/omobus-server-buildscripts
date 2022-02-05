@@ -1,7 +1,6 @@
 #!/bin/sh
-# This file is a part of the omobus-server-buildscripts project.
-# Copyright (c) 2006 - 2021 ak-obs, Ltd. <info@omobus.net>.
-# Author: Igor Artemov <i_artemov@ak-obs.ru>.
+# This file is a part of the omobus project.
+# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=OpenLDAP
 FILE=openldap-2.4.45

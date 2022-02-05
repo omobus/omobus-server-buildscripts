@@ -1,7 +1,6 @@
 #!/bin/sh
-# This file is a part of the omobus-server-buildscripts project.
+# This file is a part of the omobus project.
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
-# Author: Igor Artemov <i_artemov@ak-obs.ru>.
 
 NAME=PostgreSQL
 VER=14.1
