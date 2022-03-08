@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=PostgreSQL
-VER=14.1
+VER=14.2
 FILE=postgresql-$VER
 PREFIX=/usr/local/libexec/pgsql-14
 MYDIR=`pwd`
