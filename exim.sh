@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=Exim
-FILE=exim-4.94.2
+FILE=exim-4.95
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
@@ -24,6 +24,7 @@ cd $MYDIR
 rm -vf /usr/local/sbin/exi*.O
 rm -vf /usr/local/sbin/exim-4.90*
 rm -vf /usr/local/sbin/exim-4.92*
+rm -vf /usr/local/sbin/exim-4.94*
 
 cp -r ./exim/ /etc/
 cp ./systemd/exim.service /etc/systemd/system
