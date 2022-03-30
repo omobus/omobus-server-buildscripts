@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=OpenLDAP
-FILE=openldap-2.4.45
+FILE=openldap-2.6.1
 USER=openldap
 GROUP=openldap
 MYDIR=`pwd`
