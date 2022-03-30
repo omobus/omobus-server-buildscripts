@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=lighttpd
-FILE=lighttpd-1.4.54
+FILE=lighttpd-1.4.64
 USER=lighttpd
 GROUP=lighttpd
 MYDIR=`pwd`
@@ -15,7 +15,7 @@ fi
 
 tar -xf ./$FILE.tar.gz -C $SRCDIR
 cd $SRCDIR/$FILE
-./configure --silent --libdir=/usr/local/lib/lighttpd --with-openssl --with-ldap
+./configure --silent --libdir=/usr/local/lib/lighttpd --with-openssl --with-ldap --with-pcre --without-pcre2
 make install-strip
 cd $MYDIR
 
