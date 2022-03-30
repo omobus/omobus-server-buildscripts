@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=Dovecot
-VER=2.3.10.1
+VER=2.3.18
 FILE=dovecot-$VER
 USER=omobus
 GROUP=omobus
