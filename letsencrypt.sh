@@ -3,25 +3,51 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 MYDIR=`pwd`
+VER=3.0.4
+FILE=acme.sh-$VER
 SRCDIR=/usr/local/src
+DATADIR=/etc/ssl/omobus/.acme-data
+LOGFILE=$DATADIR/letsencrypt.log
+HTDIR=/var/www/htdocs
+LIGHTTPDCERT=/etc/ssl/omobus/lighttpd.pem
+COOKIE=`date +%Y%m%d%H%M`
 
+## remove obsolete data:
+rm -v /var/log/letsencrypt.log
+
+## issuance of a certificate:
 if [ -z $1 ]; then
     echo 'Please, define domain name.'
     exit
 fi
 
-cd $SRCDIR
-git clone https://github.com/Neilpang/acme.sh.git
-cd $SRCDIR/acme.sh
-mkdir -pv $SRCDIR/acme.sh/.data
-echo "ACCOUNT_EMAIL='support@omobus.net'" > $SRCDIR/acme.sh/.data/account.conf 
-$SRCDIR/acme.sh/acme.sh --force --issue --home $SRCDIR/acme.sh/.data -d $1 -w /var/www/htdocs --use-wget --syslog 3 --log /var/log/letsencrypt.log --log-level 2
-rm /etc/ssl/omobus/lighttpd.pem
-cat $SRCDIR/acme.sh/.data/$1/$1.cer $SRCDIR/acme.sh/.data/$1/$1.key > /etc/ssl/omobus/lighttpd.pem
-chmod 600 /etc/ssl/omobus/lighttpd.pem
-chown omobus:omobus /etc/ssl/omobus/lighttpd.pem
-cd $MYDIR
+# https://github.com/acmesh-official/acme.sh
+tar -xf ./$FILE.tar.gz -C $SRCDIR
+cd $SRCDIR/$FILE
 
-echo "33 0 10,20,30 * * root $SRCDIR/acme.sh/acme.sh --force --renew --home $SRCDIR/acme.sh/.data -d $1 -w /var/www/htdocs --use-wget --syslog 3 --log /var/log/letsencrypt.log --log-level 2 && /bin/cat $SRCDIR/acme.sh/.data/$1/$1.cer $SRCDIR/acme.sh/.data/$1/$1.key > /etc/ssl/omobus/lighttpd.pem && /bin/chmod 600 /etc/ssl/omobus/lighttpd.pem && /bin/chown omobus:omobus /etc/ssl/omobus/lighttpd.pem && /bin/systemctl restart lighttpd" > /etc/cron.d/letsencrypt
+mkdir -m 0700 -pv $DATADIR
+echo "ACCOUNT_EMAIL='support@omobus.net'" > $DATADIR/account.conf
+
+$SRCDIR/$FILE/acme.sh --force --issue --home $DATADIR -d $1 -w $HTDIR --use-wget --syslog 3 --log $LOGFILE --log-level 2
+cat $DATADIR/$1/$1.cer $DATADIR/$1/$1.key > $DATADIR/lighttpd-$COOKIE.pem
+chmod 0600 $DATADIR/lighttpd-$COOKIE.pem
+chown omobus:omobus $DATADIR/lighttpd-$COOKIE.pem
+rm $LIGHTTPDCERT
+ln -s $DATADIR/lighttpd-$COOKIE.pem $LIGHTTPDCERT
+
+## renew script:
+echo "#!/bin/sh" > $DATADIR/$1-renew.sh
+echo "" >> $DATADIR/$1-renew.sh
+echo "COOKIE=\`date +%Y%m%d%H%M\`" >> $DATADIR/$1-renew.sh
+echo "" >> $DATADIR/$1-renew.sh
+echo "$SRCDIR/$FILE/acme.sh --force --renew --home $DATADIR -d $1 -w $HTDIR --use-wget --syslog 3 --log $LOGFILE --log-level 2" >> $DATADIR/$1-renew.sh
+echo "cat $DATADIR/$1/$1.cer $DATADIR/$1/$1.key > $DATADIR/lighttpd-\$COOKIE.pem" >> $DATADIR/$1-renew.sh
+echo "chmod 0600 $DATADIR/lighttpd-\$COOKIE.pem" >> $DATADIR/$1-renew.sh
+echo "chown omobus:omobus $DATADIR/lighttpd-\$COOKIE.pem" >> $DATADIR/$1-renew.sh
+echo "rm $LIGHTTPDCERT" >> $DATADIR/$1-renew.sh
+echo "ln -s $DATADIR/lighttpd-\$COOKIE.pem $LIGHTTPDCERT" >> $DATADIR/$1-renew.sh
+
+## crontab:
+echo "33 0 10,20,30 * * root /bin/sh $DATADIR/$1-renew.sh && /bin/systemctl restart lighttpd" > /etc/cron.d/letsencrypt
 chown root:root /etc/cron.d/letsencrypt
 chmod 644 /etc/cron.d/letsencrypt
