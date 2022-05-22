@@ -65,7 +65,6 @@ chown root:root /etc/dovecot/dovecot.conf && chmod 600 /etc/dovecot/dovecot.conf
 chown root:root /etc/dovecot/dovecot-ldap.conf && chmod 600 /etc/dovecot/dovecot-ldap.conf
 
 ln -sr /etc/ssl/omobus/omobus.net.pem /etc/ssl/omobus/dovecot.pem
-openssl dhparam -out /etc/ssl/private/dovecot-dhparams.pem 4096
 
 mkdir -m 750 -p /var/spool/dovecot && chown $USER:$GROUP /var/spool/dovecot
 
