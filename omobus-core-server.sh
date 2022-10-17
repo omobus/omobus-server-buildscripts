@@ -70,9 +70,9 @@ cp ./omobus-ps.sh /usr/local/bin/omobus-ps
 chmod 0755 /usr/local/bin/omobus-ps
 chown root:root /usr/local/bin/omobus-ps
 
-cp ./omobus-stats.sh /usr/local/bin/omobus-stats
-chmod 0755 /usr/local/bin/omobus-stats
-chown root:root /usr/local/bin/omobus-stats
+#cp ./omobus-stats.sh /usr/local/bin/omobus-stats
+#chmod 0755 /usr/local/bin/omobus-stats
+#chown root:root /usr/local/bin/omobus-stats
 
 sh ./fstab.sh
 
