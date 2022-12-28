@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=PostgreSQL
-VER=14.2
+VER=14.6
 FILE=postgresql-$VER
 PREFIX=/usr/local/libexec/pgsql-14
 MYDIR=`pwd`
@@ -16,7 +16,7 @@ fi
 
 tar -xf ./$FILE.tar.bz2 -C $SRCDIR
 cd $SRCDIR/$FILE
-./configure --silent --disable-thread-safety --with-uuid=e2fs --with-systemd --prefix=$PREFIX #--with-ldap --with-openssl
+./configure --silent --disable-thread-safety --with-uuid=e2fs --with-systemd --prefix=$PREFIX #--with-ldap --with-openssl --with-libxml
 make install
 cd ./contrib/hstore/
 make install
