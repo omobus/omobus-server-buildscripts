@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=Pure-FTPd
-FILE=pure-ftpd-1.0.50
+FILE=pure-ftpd-1.0.51
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
 
