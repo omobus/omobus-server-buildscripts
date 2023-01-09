@@ -66,7 +66,7 @@ After all, install omobus services.
 
 # LICENSE
 
-Copyright (c) 2006 - 2019 ak-obs, Ltd. <info@omobus.net>.
+Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 All rights reserved.
 

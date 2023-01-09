@@ -1,6 +1,6 @@
 #!/bin/sh
 # This file is a part of the omobus project.
-# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 MYDIR=`pwd`
 VER=3.0.4

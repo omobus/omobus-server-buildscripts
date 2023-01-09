@@ -1,6 +1,6 @@
 #! /bin/sh
 # This file is a part of the omobusproject.
-# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 DATE_MARK=`date +%Y%m%d%H%M`
 #DATE_MARK=`date +%w`

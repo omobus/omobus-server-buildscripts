@@ -1,6 +1,6 @@
 #!/bin/sh
 # This file is a part of the omobus project.
-# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 FILE=libsmpp34-1.14.0
 MYDIR=`pwd`

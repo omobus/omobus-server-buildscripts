@@ -1,6 +1,6 @@
 #!/bin/sh
 # This file is a part of the omobus project.
-# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 echo '' > ./fstab.tmp
 echo '# omobus mount points:' >> ./fstab.tmp
