@@ -2,7 +2,7 @@
 # This file is a part of the omobus project.
 # Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
 
-VER=5.2.1
+VER=5.3.0
 FILE=jemalloc-$VER
 MYDIR=`pwd`
 SRCDIR=/usr/local/src
