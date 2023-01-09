@@ -1,9 +1,9 @@
 #!/bin/sh
 # This file is a part of the omobus project.
-# Copyright (c) 2006 - 2022 ak-obs, Ltd. <info@omobus.net>.
+# Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=lighttpd
-FILE=lighttpd-1.4.64
+FILE=lighttpd-1.4.68
 USER=lighttpd
 GROUP=lighttpd
 MYDIR=`pwd`
