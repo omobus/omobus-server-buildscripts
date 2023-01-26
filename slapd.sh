@@ -15,7 +15,7 @@ fi
 
 tar -xf ./$FILE.tgz -C $SRCDIR
 cd $SRCDIR/$FILE
-./configure --silent --with-tls=openssl --enable-backends=no --enable-mdb=yes --enable-monitor=yes
+./configure --silent --with-tls=openssl --enable-backends=no --enable-mdb=yes
 make install
 cd $MYDIR
 
