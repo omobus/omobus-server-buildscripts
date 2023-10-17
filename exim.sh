@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=Exim
-FILE=exim-4.96
+FILE=exim-4.96.2
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
