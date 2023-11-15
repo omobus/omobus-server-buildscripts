@@ -3,7 +3,8 @@
 # Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 NAME=Exim
-FILE=exim-4.96.2
+FILE=exim-4.97
+#FILE=exim-4.96.2
 USER=omobus
 GROUP=omobus
 MYDIR=`pwd`
@@ -13,7 +14,15 @@ if [ ! -f $FILE.tar.bz2 ]; then
     wget http://exim.mirror.gtcomm.net/exim/exim4/$FILE.tar.bz2
 fi
 
+# exim-4.97:
+sudo apt-get install -y libfile-fcntllock-perl libgnutls28-dev
+
 rm -vf /usr/local/sbin/exim
+rm -vf /usr/local/sbin/exim-4.90*
+rm -vf /usr/local/sbin/exim-4.92*
+rm -vf /usr/local/sbin/exim-4.94*
+rm -vf /usr/local/sbin/exim-4.95*
+rm -vf /usr/local/sbin/exim-4.96*
 
 tar -xf ./$FILE.tar.bz2 -C $SRCDIR
 cd $SRCDIR/$FILE
@@ -22,9 +31,6 @@ make install
 cd $MYDIR
 
 rm -vf /usr/local/sbin/exi*.O
-rm -vf /usr/local/sbin/exim-4.90*
-rm -vf /usr/local/sbin/exim-4.92*
-rm -vf /usr/local/sbin/exim-4.94*
 
 cp -r ./exim/ /etc/
 cp ./systemd/exim.service /etc/systemd/system
