@@ -15,7 +15,7 @@ if [ ! -f $FILE.tar.bz2 ]; then
 fi
 
 # exim-4.97:
-sudo apt-get install -y libfile-fcntllock-perl libgnutls28-dev
+apt-get install -y libfile-fcntllock-perl libgnutls28-dev
 
 rm -vf /usr/local/sbin/exim
 rm -vf /usr/local/sbin/exim-4.90*
