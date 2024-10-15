@@ -3,7 +3,7 @@
 # Copyright (c) 2006 - 2023 ak-obs, Ltd. <info@omobus.net>.
 
 MYDIR=`pwd`
-VER=3.0.4
+VER=3.0.7
 FILE=acme.sh-$VER
 SRCDIR=/usr/local/src
 DATADIR=/etc/ssl/omobus/.acme-data
@@ -28,7 +28,8 @@ cd $SRCDIR/$FILE
 mkdir -m 0700 -pv $DATADIR
 echo "ACCOUNT_EMAIL='support@omobus.net'" > $DATADIR/account.conf
 
-$SRCDIR/$FILE/acme.sh --force --issue --home $DATADIR -d $1 -w $HTDIR --use-wget --syslog 3 --log $LOGFILE --log-level 2
+$SRCDIR/$FILE/acme.sh --force --issue --home $DATADIR -d $1 -w $HTDIR --use-wget --syslog 3 --log $LOGFILE --log-level 2 --server https://acme-v02.api.letsencrypt.org/directory
+ln -s $DATADIR/$1_ecc $DATADIR/$1
 cat $DATADIR/$1/fullchain.cer $DATADIR/$1/$1.key > $DATADIR/lighttpd-$COOKIE.pem
 chmod 0600 $DATADIR/lighttpd-$COOKIE.pem
 chown omobus:omobus $DATADIR/lighttpd-$COOKIE.pem
