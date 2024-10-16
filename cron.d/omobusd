@@ -3,7 +3,6 @@
 0 1-23/1 * * * root /usr/local/bin/omobus-event acts docs
 0 3,23 * * * root /usr/local/bin/omobus-event sync
 0 1 * * * root /usr/local/bin/omobus-event gc
-0 0 * * * root /usr/local/bin/omobus-event snapshots
 59 23 * * * root /usr/local/bin/omobus-event routes
 #0 22 * * * root /usr/local/bin/omobus-event import
 #15 5,14,21 * * * root /usr/local/bin/omobus-event export
